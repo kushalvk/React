@@ -9,12 +9,20 @@ function App() {
 
   const addvalue = () => {
     counter = counter + 1;
-    setCounter(counter)
+    if (counter === 21) {
+      console.log("Not added more then 20");
+    } else {
+      setCounter(counter)
     console.log("value added", counter);
+    }
   }
 
   const removevalue =() => {
-    setCounter(counter - 1)
+    if (counter === 0) {
+      console.log("Value can't in nagative");
+    } else {
+      setCounter(counter - 1)
+    }
   }
 
   return (
