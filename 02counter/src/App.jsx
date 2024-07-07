@@ -8,12 +8,19 @@ function App() {
   // let counter = 7;
 
   const addvalue = () => {
-    counter = counter + 1;
     if (counter === 21) {
       console.log("Not added more then 20");
     } else {
-      setCounter(counter)
-    console.log("value added", counter);
+      // setCounter(counter + 1);
+      // setCounter(counter + 1);
+      // setCounter(counter + 1); // you can not a same opration(it's not work, it increase only onece)
+
+      // we can parform as follows to same oopration
+      setCounter(prevCounter => prevCounter + 1)
+      setCounter(prevCounter => prevCounter + 1)
+      setCounter(prevCounter => prevCounter + 1)
+
+      console.log("value added", counter);
     }
   }
 
