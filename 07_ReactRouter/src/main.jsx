@@ -32,6 +32,7 @@ import Github, { githubInfoLoder } from './camponents/Github/Github'
 // ])
 
 // 2)
+// chnage "Layour" by create a router.chnaging layers is come from components
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
