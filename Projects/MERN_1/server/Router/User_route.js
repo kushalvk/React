@@ -11,10 +11,10 @@ router.post("/login", async (req, res) => {
 
     const user = await UserModel.findOne({username, Password, role})
 
-    const token = await user.generateAuthToken()
     if (!user) {
         res.json("Data not Found")
     } else {
+        const token = await user.generateAuthToken();
         res.json({user, token});
     }
 })

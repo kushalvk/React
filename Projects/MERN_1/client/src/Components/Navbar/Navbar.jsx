@@ -1,7 +1,7 @@
 import {FaHome, FaUserPlus, FaUsers, FaUser} from 'react-icons/fa';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {SlLogout} from "react-icons/sl";
+import {SlLogin, SlLogout} from "react-icons/sl";
 import {useNavigate} from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -33,49 +33,87 @@ function Navbar({isOpen}) {
     return (<div
         className={`bg-gray-500 ${isOpen ? 'w-[20vw]' : 'w-[5vw]'} h-screen flex flex-col pl-10 gap-4 pt-7 text-white text-center transition-all duration-300`}
     >
-        {isOpen ? (<>
-            <a href="/dashbored" className="flex items-center mt-10 gap-2">
-                <FaHome/> Dashbored
-            </a>
-            <a href="/adduser" className="flex items-center gap-2">
-                <FaUserPlus/> Add User
-            </a>
-            <a href="/alluser" className="flex items-center gap-2">
-                <FaUsers/> All User
-            </a>
-            {loggedin ? <>
-                <a href="/profile" className="flex items-center gap-2">
-                    <FaUser/> Profile
-                </a>
-                <div className="mt-auto mb-4">
-                    <a onClick={handlelogout} className="flex items-center gap-2 cursor-pointer">
-                        <SlLogout/> Logout
-                    </a>
-                </div>
-            </> : null}
+        {isOpen ? (
+            <>
+                {loggedin ?
+                    <>
+                        {loggedin.role === "ADMIN" ?
+                            <>
+                                <a href="/dashbored" className="flex items-center mt-10 gap-2">
+                                    <FaHome/> Dashbored
+                                </a>
+                                <a href="/adduser" className="flex items-center gap-2">
+                                    <FaUserPlus/> Add User
+                                </a>
+                                <a href="/alluser" className="flex items-center gap-2">
+                                    <FaUsers/> All User
+                                </a>
+                            </> : <>
+                                <a href="/home" className="flex items-center mt-10 gap-2">
+                                    <FaHome/> Home
+                                </a>
+                            </>}
+                        <a href="/profile" className="flex items-center gap-2">
+                            <FaUser/> Profile
+                        </a>
+                        <div className="mt-auto mb-4">
+                            <a onClick={handlelogout} className="flex items-center gap-2 cursor-pointer">
+                                <SlLogout/> Logout
+                            </a>
+                        </div>
+                    </> :
+                    <>
+                        <a href="/home" className="flex items-center mt-10 gap-2">
+                            <FaHome/> Home
+                        </a>
+                        <div className="mt-auto mb-4">
+                            <a href="/" className="flex items-center gap-2 cursor-pointer">
+                                <SlLogin/> Login
+                            </a>
+                        </div>
+                    </>}
+            </>) : (
+            <>
+                {loggedin ?
+                    <>
+                        {loggedin.role === "ADMIN" ?
+                            <>
+                                <a href="/dashbored" className="mt-10 -ml-10 flex justify-center">
+                                    <FaHome/>
+                                </a>
+                                <a href="/adduser" className="flex -ml-10 justify-center">
+                                    <FaUserPlus/>
+                                </a>
+                                <a href="/alluser" className="flex -ml-10 justify-center">
+                                    <FaUsers/>
+                                </a>
+                            </> : <>
+                                <a href="/home" className="mt-10 -ml-10 flex justify-center">
+                                    <FaHome/>
+                                </a>
+                            </>}
 
-        </>) : (<>
-            <a href="/dashbored" className="mt-10 -ml-10 flex justify-center">
-                <FaHome/>
-            </a>
-            <a href="/adduser" className="flex -ml-10 justify-center">
-                <FaUserPlus/>
-            </a>
-            <a href="/alluser" className="flex -ml-10 justify-center">
-                <FaUsers/>
-            </a>
-            {loggedin ? <>
-                    <a href="/profile" className="flex -ml-10 justify-center">
-                        <FaUser/>
-                    </a>
-                    <div className="mt-auto mb-4">
-                    <a href="/alluser" onClick={handlelogout} className="flex -ml-10 justify-center cursor-pointer">
-                        <SlLogout/>
-                    </a>
-                    </div>
-                </>
-                : null}
-        </>)}
+                        <a href="/profile" className="flex -ml-10 justify-center">
+                            <FaUser/>
+                        </a>
+                        <div className="mt-auto mb-4">
+                            <a onClick={handlelogout}
+                               className="flex -ml-10 justify-center cursor-pointer">
+                                <SlLogout/>
+                            </a>
+                        </div>
+                    </> : <>
+                        <a href="/home" className="mt-10 -ml-10 flex justify-center">
+                            <FaHome/>
+                        </a>
+                        <div className="mt-auto mb-4">
+                            <a href="/"
+                               className="flex -ml-10 justify-center cursor-pointer">
+                                <SlLogin/>
+                            </a>
+                        </div>
+                    </>}
+            </>)}
     </div>);
 }
 
